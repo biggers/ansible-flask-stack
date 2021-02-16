@@ -2,9 +2,9 @@
   # Install nginx
 
 - name: Install nginx
-  apt: pkg={{ item }} state=installed
-  with_items:
-  - nginx
+  apt: pkg=nginx state=latest
+  # with_items:
+  # - nginx
 
 # - name: remove default nginx site
 #   file: path=/etc/nginx/sites-enabled/default state=absent

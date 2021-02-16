@@ -2,10 +2,10 @@
   # Install supervisor
 
 - name: Install supervisor
-  apt: pkg={{ item }} state=installed
-  with_items:
-  - supervisor
+  apt: pkg=supervisor state=latest
   notify: restart supervisor
+  # with_items:
+  # - supervisor
 
 - name: Ensure supervisor config for app
   template: src=supervisor.conf.j2 dest=/etc/supervisor/conf.d/{{ flaskapp_app_name }}.conf

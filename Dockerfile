@@ -1,4 +1,4 @@
-FROM ansible/ubuntu14.04-ansible:stable
+FROM ansible/ubuntu20.04-ansible:stable
 
 # Add playbooks to the Docker image
 ADD . /build/ansible-flaskapp

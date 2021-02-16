@@ -1,9 +1,20 @@
 ---
   # Install common packages and do basic configuration stuff
 
-- name: Ensure packages required for the Flask application
-  apt: pkg={{ item }} state=present
-  with_items: '{{ flaskapp_app_packages }}'
+- name: Ensure Ubuntu VM is up-to-date
+  apt:
+    upgrade: safe
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install misc systems packages
+  apt: name="{{ flaskapp_additional_app_packages }}"
+
+- name: Install setfacl support
+  apt: pkg=acl
+
+- name: Ensure Ubuntu is up-to-date; install packages for the Flask app
+  apt: name="{{ flaskapp_app_packages }}" state=latest
 
 - name: Install the latest pip version
   pip: name=pip extra_args='-U'

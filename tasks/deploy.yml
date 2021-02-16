@@ -3,8 +3,8 @@
 
 - name: Run pre hooks
   command: "{{ item }} chdir={{ flaskapp_app_directory }}"
-  with_items: flaskapp_app_pre_hooks
-  environment: flaskapp_app_environment
+  with_items: "{{ flaskapp_app_pre_hooks }}"
+  environment: "{{ flaskapp_app_environment }}"
   tags:
     - hook
 
@@ -14,9 +14,9 @@
     force=yes
   when: flaskapp_app_repository is defined and flaskapp_app_repository
 
-- stat: path={{ flaskapp_app_config }}
+- stat: path="{{ flaskapp_app_config }}"
   delegate_to: localhost
-  sudo: false
+  become: false
   register: flaskapp_app_config_file
   when: flaskapp_app_config is defined and flaskapp_app_config
 
